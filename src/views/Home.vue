@@ -4,10 +4,10 @@
     <v-row>
       <v-col>
         <v-row justify="center">
-          <v-btn class="warning ma-1" to="/meetups" depressed large>
+          <v-btn class="primary ma-1" to="/meetups" depressed large>
             Explore Meetups
           </v-btn>
-          <v-btn class="warning ma-1" to="/organize-meetup" depressed large>
+          <v-btn class="primary ma-1" to="/organize-meetup" depressed large>
             Organize Meetups
           </v-btn>
         </v-row>
