@@ -14,7 +14,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar class="primary" dark>
+    <v-app-bar color="primary" dark>
       <!-- Humberger menu toggle -->
       <v-app-bar-nav-icon class="hidden-sm-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -40,16 +40,16 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   data() {
     return {
       drawer: false,
       items: [
-        { icon: "supervisor_account", title: "View Meetups", link: "/meetups" },
-        { icon: "room", title: "Organize Meetup", link: "/meetups/organize" },
-        { icon: "person", title: "Profile", link: "/profile" },
-        { icon: "face", title: "Sign Up", link: "/signup" },
-        { icon: "lock_open", title: "Sign In", link: "/signin" },
+        { icon: 'supervisor_account', title: 'View Meetups', link: '/meetups' },
+        { icon: 'room', title: 'Organize Meetup', link: '/organize-meetup' },
+        { icon: 'person', title: 'Profile', link: '/profile' },
+        { icon: 'face', title: 'Sign Up', link: '/signup' },
+        { icon: 'lock_open', title: 'Sign In', link: '/signin' },
       ],
     };
   },

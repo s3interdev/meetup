@@ -1,51 +1,44 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/views/Home';
-import Meetups from '@/views/meetup/Meetups';
-import OrganizeMeetup from '@/components/meetup/OrganizeMeetup';
-import Meetup from '@/components/meetup/Meetup';
-import UserProfile from '@/views/user/UserProfile';
-import Signup from '@/components/user/Signup';
-import Signin from '@/components/user/Signin';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'home',
+    component: () => import('@/views/Home'),
   },
   {
     path: '/meetups',
     name: 'meetups',
-    component: Meetups,
-  },
-  {
-    path: '/meetups/organize',
-    name: 'organizemeetup',
-    component: OrganizeMeetup,
+    component: () => import('@/views/meetup/Meetups'),
   },
   {
     path: '/meetups/:id',
     name: 'meetup',
-    component: Meetup,
+    component: () => import('@/components/meetup/Meetup'),
     props: true,
+  },
+  {
+    path: '/organize-meetup',
+    name: 'organizemeetup',
+    component: () => import('@/components/meetup/OrganizeMeetup'),
   },
   {
     path: '/profile',
     name: 'userprofile',
-    component: UserProfile,
+    component: () => import('@/views/user/UserProfile'),
   },
   {
     path: '/signup',
     name: 'signup',
-    component: Signup,
+    component: () => import('@/components/user/Signup'),
   },
   {
     path: '/signin',
     name: 'signin',
-    component: Signin,
+    component: () => import('@/components/user/Signin'),
   },
 ];
 
