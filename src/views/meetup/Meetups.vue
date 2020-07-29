@@ -1,24 +1,19 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row v-for="meetup in meetups" :key="meetup.id">
       <v-col>
         <v-card>
           <v-container fluid>
             <v-row>
               <v-col xs="5" sm="4" md="3">
-                <v-img
-                  src="https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg"
-                  height="150"
-                >
-                </v-img>
+                <v-img :src="meetup.imageUrl" height="150"></v-img>
               </v-col>
               <v-col xs="7" sm="8" md="9">
-                <v-card-title class="dark--text">Meetup in New York</v-card-title>
-                <v-card-subtitle class="subtitle-2">29th July 2020, Madison Square Garden</v-card-subtitle>
+                <v-card-title class="dark--text">{{ meetup.title }}</v-card-title>
+                <v-card-subtitle class="subtitle-2">{{ meetup.date }}, {{ meetup.location }}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn class="success" text to="/meetups/1">
-                    <v-icon left>arrow_forward</v-icon>
-                    View Meetup
+                  <v-btn class="info" text :to="{ name: 'meetup', params: { id: meetup.id } }">
+                    <v-icon left>arrow_forward</v-icon>View Meetup
                   </v-btn>
                 </v-card-actions>
               </v-col>
@@ -32,9 +27,14 @@
 
 <script>
 export default {
-  name: 'Meetups',
+  name: "Meetups",
   data() {
     return {};
+  },
+  computed: {
+    meetups() {
+      return this.$store.getters.loadedMeetups;
+    },
   },
 };
 </script>

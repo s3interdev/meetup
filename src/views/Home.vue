@@ -4,12 +4,8 @@
     <v-row>
       <v-col>
         <v-row justify="center">
-          <v-btn class="info ma-1" to="/meetups" depressed large>
-            Explore Meetups
-          </v-btn>
-          <v-btn class="info ma-1" to="/organize-meetup" depressed large>
-            Organize Meetups
-          </v-btn>
+          <v-btn class="info ma-1" to="/meetups" depressed large>Explore Meetups</v-btn>
+          <v-btn class="info ma-1" to="/organize-meetup" depressed large>Organize Meetups</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -26,9 +22,7 @@
             transition="fade-transition"
             @click="onSelectMeetup(meetup.id)"
           >
-            <div class="title">
-              {{ meetup.title }}
-            </div>
+            <div class="title">{{ meetup.title }}</div>
           </v-carousel-item>
         </v-carousel>
       </v-col>
@@ -47,47 +41,18 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
-    return {
-      meetups: [
-        {
-          ids: '7K7aaC4cpxyEw4NW',
-          id: 1,
-          title: 'Meetup in New York',
-          location: 'Times Square',
-          date: '2020-07-25',
-          imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo debitis maiores hic dignissimos voluptatem. totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit.Explicabo debitis maiores hic dignissimos voluptatem.totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.',
-        },
-        {
-          ids: 'WHfXpbuT2dNafmZ3',
-          id: 2,
-          title: 'Meetup in Nairobi',
-          location: 'Nairobi Garage, Kilimani',
-          date: '2020-07-26',
-          imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nairobi_skyline_P1000021.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo debitis maiores hic dignissimos voluptatem. totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit.Explicabo debitis maiores hic dignissimos voluptatem.totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.',
-        },
-        {
-          ids: 'aqwkN2PShdDhTwTw',
-          id: 3,
-          title: 'Meetup in London',
-          location: 'Tower Bridge',
-          date: '2020-07-30',
-          imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/2/2c/Tower_of_London_viewed_from_the_River_Thames.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo debitis maiores hic dignissimos voluptatem. totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit.Explicabo debitis maiores hic dignissimos voluptatem.totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.',
-        },
-      ],
-    };
+    return {};
   },
   methods: {
     onSelectMeetup(id) {
-      this.$router.push('/meetups/' + id);
+      this.$router.push({ name: "meetup", params: { id: id } });
+    },
+  },
+  computed: {
+    meetups() {
+      return this.$store.getters.featuredMeetups;
     },
   },
 };
