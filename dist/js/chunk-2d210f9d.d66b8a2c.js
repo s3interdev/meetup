@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d210f9d"],{b9d4:function(e,n,t){"use strict";t.r(n);var r=function(){var e=this,n=e.$createElement;e._self._c;return e._m(0)},u=[function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("h1",[e._v("Organize Meetup Component")])])}],a={name:"OrganizeMeetup",data:function(){return{}}},c=a,i=t("2877"),l=Object(i["a"])(c,r,u,!1,null,null,null);n["default"]=l.exports}}]);
-//# sourceMappingURL=chunk-2d210f9d.d66b8a2c.js.map

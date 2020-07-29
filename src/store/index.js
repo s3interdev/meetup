@@ -48,12 +48,12 @@ export default new Vuex.Store({
   actions: {
     organizeMeetup({ commit }, payload) {
       const meetup = {
+        id: '2WdvbqNnmau7nfsK',
         title: payload.title,
         location: payload.location,
         imageUrl: payload.imageUrl,
         description: payload.description,
         date: payload.date,
-        id: '2WdvbqNnmau7nfsK',
       };
 
       // Reachout to the database and persist the data
