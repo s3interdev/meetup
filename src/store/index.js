@@ -10,7 +10,7 @@ export default new Vuex.Store({
         id: '7K7aaC4cpxyEw4NW',
         title: 'Meetup in New York',
         location: 'Times Square',
-        date: '2020-07-25',
+        date: new Date(),
         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg',
         description:
           'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo debitis maiores hic dignissimos voluptatem. totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit.Explicabo debitis maiores hic dignissimos voluptatem.totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.',
@@ -19,7 +19,7 @@ export default new Vuex.Store({
         id: 'WHfXpbuT2dNafmZ3',
         title: 'Meetup in Nairobi',
         location: 'Nairobi Garage, Kilimani',
-        date: '2020-07-26',
+        date: new Date(),
         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nairobi_skyline_P1000021.jpg',
         description:
           'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo debitis maiores hic dignissimos voluptatem. totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit.Explicabo debitis maiores hic dignissimos voluptatem.totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.',
@@ -28,7 +28,7 @@ export default new Vuex.Store({
         id: 'aqwkN2PShdDhTwTw',
         title: 'Meetup in London',
         location: 'Tower Bridge',
-        date: '2020-07-30',
+        date: new Date(),
         imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/2/2c/Tower_of_London_viewed_from_the_River_Thames.jpg',
         description:

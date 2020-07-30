@@ -10,7 +10,7 @@
               </v-col>
               <v-col xs="7" sm="8" md="9">
                 <v-card-title class="dark--text">{{ meetup.title }}</v-card-title>
-                <v-card-subtitle class="subtitle-2">{{ meetup.date }}, {{ meetup.location }}</v-card-subtitle>
+                <v-card-subtitle class="subtitle-2">{{ meetup.date | date }}, {{ meetup.location }}</v-card-subtitle>
                 <v-card-actions>
                   <v-btn class="info" text :to="{ name: 'meetup', params: { id: meetup.id } }">
                     <v-icon left>arrow_forward</v-icon>View Meetup
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "Meetups",
+  name: 'Meetups',
   data() {
     return {};
   },

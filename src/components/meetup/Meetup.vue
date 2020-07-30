@@ -6,7 +6,7 @@
           <v-card-title class="dark--text">{{ meetup.title }}</v-card-title>
           <v-img :src="meetup.imageUrl" height="400"></v-img>
           <v-card-text>
-            <p class="subtitle-1">{{ meetup.date }}</p>
+            <p class="subtitle-1">{{ meetup.date | date }}</p>
             <p class="subtitle-1">{{ meetup.location }}</p>
             <p class="body-1">{{ meetup.description }}</p>
           </v-card-text>
@@ -22,8 +22,8 @@
 
 <script>
 export default {
-  name: "Meetup",
-  props: ["id"],
+  name: 'Meetup',
+  props: ['id'],
   data() {
     return {};
   },
