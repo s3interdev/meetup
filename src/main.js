@@ -7,6 +7,8 @@ import { auth } from './firebase/firebase';
 import DateFilter from './filters/date';
 
 Vue.config.productionTip = false;
+
+// Initialize the date filter
 Vue.filter('date', DateFilter);
 
 // Let Firebase auth initialize before creating the app

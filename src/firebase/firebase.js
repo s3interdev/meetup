@@ -20,7 +20,7 @@ firebase.initializeApp(firebaseConfig);
 // Utilities
 const auth = firebase.auth();
 const db = firebase.firestore();
-const strg = firebase.storage();
+const storage = firebase.storage();
 
 // Export utilities
-export { auth, db, strg };
+export { auth, db, storage };

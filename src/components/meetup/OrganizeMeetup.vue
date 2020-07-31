@@ -8,12 +8,12 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col cols="12" sm="6" offset-sm="3">
         <!-- Organize meetup form -->
         <v-form ref="form" v-model="valid">
           <!-- Title field -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-text-field
                 label="Meetup Title"
                 v-model="title"
@@ -26,7 +26,7 @@
 
           <!-- Location field -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-text-field
                 label="Meetup Location"
                 v-model="location"
@@ -39,7 +39,7 @@
 
           <!-- Image field -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-text-field
                 label="Meetup Image"
                 v-model="imageUrl"
@@ -52,14 +52,14 @@
 
           <!-- Image display -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-img height="300" :src="imageUrl" contain></v-img>
             </v-col>
           </v-row>
 
           <!-- Description field -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-textarea
                 label="Meetup Descripton"
                 v-model="description"
@@ -72,7 +72,7 @@
 
           <!-- Date field -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-menu
                 ref="dateMenu"
                 v-model="dateMenu"
@@ -105,7 +105,7 @@
 
           <!-- Time field -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-menu
                 ref="timeMenu"
                 v-model="timeMenu"
@@ -142,7 +142,7 @@
 
           <!-- Buttons -->
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col>
               <v-btn class="info ma-3" @click="organizeMeetup">Organize Meetup</v-btn>
               <v-btn class="secondary ma-3" @click="closeForm">Cancel</v-btn>
             </v-col>
@@ -154,10 +154,10 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
-  name: 'OrganizeMeetup',
+  name: "OrganizeMeetup",
   data() {
     return {
       valid: true,
@@ -169,11 +169,7 @@ export default {
       description: null,
       date: null,
       time: null,
-      textRules: [
-        (value) => !!value || 'This is a required field.',
-        (value) =>
-          (value && value.length >= 5) || 'The text in this field needs to be more than 5 characters in length.',
-      ],
+      textRules: [(value) => !!value || "This is a required field."],
     };
   },
   methods: {
@@ -183,7 +179,7 @@ export default {
     },
     closeForm() {
       this.resetForm();
-      this.$router.push({ name: 'meetups' });
+      this.$router.push({ name: "meetups" });
     },
     organizeMeetup() {
       if (this.$refs.form.validate()) {
@@ -195,16 +191,17 @@ export default {
           date: this.concatenatedDateTime,
         };
 
-        this.$store.dispatch('organizeMeetup', meetupData);
+        this.$store.dispatch("organizeMeetup", meetupData);
         this.closeForm();
       }
     },
   },
   computed: {
     concatenatedDateTime() {
-      const selectedDate = this.date;
-      const selectedTime = this.time;
-      const computedDateTime = moment(selectedDate + ' ' + selectedTime, 'DD-MM-YYYY HH:mm:ss').format();
+      const computedDateTime = moment(
+        this.date + " " + this.time,
+        "DD-MM-YYYY HH:mm:ss"
+      ).format();
 
       return computedDateTime;
     },
