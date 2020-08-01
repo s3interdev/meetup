@@ -8,16 +8,16 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="6" offset-sm="3">
+      <v-col cols="12" sm="8" offset-sm="2">
         <!-- Organize meetup form -->
-        <v-form ref="form" v-model="valid">
+        <v-form ref="organizemeetupForm" v-model="valid" lazy-validation>
           <!-- Title field -->
           <v-row>
             <v-col>
               <v-text-field
                 label="Meetup Title"
                 v-model="title"
-                :rules="textRules"
+                :rules="[rules.required, rules.minimum]"
                 prepend-icon="group"
                 required
               ></v-text-field>
@@ -30,7 +30,7 @@
               <v-text-field
                 label="Meetup Location"
                 v-model="location"
-                :rules="textRules"
+                :rules="[rules.required, rules.minimum]"
                 prepend-icon="add_location"
                 required
               ></v-text-field>
@@ -43,7 +43,7 @@
               <v-text-field
                 label="Meetup Image"
                 v-model="imageUrl"
-                :rules="textRules"
+                :rules="[rules.required]"
                 prepend-icon="insert_photo"
                 required
               ></v-text-field>
@@ -63,7 +63,7 @@
               <v-textarea
                 label="Meetup Descripton"
                 v-model="description"
-                :rules="textRules"
+                :rules="[rules.required, rules.minimum]"
                 prepend-icon="create"
                 required
               ></v-textarea>
@@ -89,7 +89,7 @@
                     readonly
                     v-bind="attrs"
                     v-on="on"
-                    :rules="textRules"
+                    :rules="[rules.required]"
                     prepend-icon="event"
                     required
                   ></v-text-field>
@@ -124,7 +124,7 @@
                     readonly
                     v-bind="attrs"
                     v-on="on"
-                    :rules="textRules"
+                    :rules="[rules.required]"
                     prepend-icon="access_time"
                     required
                   ></v-text-field>
@@ -169,20 +169,25 @@ export default {
       description: null,
       date: null,
       time: null,
-      textRules: [(value) => !!value || "This is a required field."],
+      rules: {
+        minimum: (value) =>
+          (value && value.length >= 8) ||
+          "A minimum of 8 characters is required.",
+        required: (value) => !!value || "This is a required field.",
+      },
     };
   },
   methods: {
     resetForm() {
-      this.$refs.form.resetValidation();
-      this.$refs.form.reset();
+      this.$refs.organizemeetupForm.resetValidation();
+      this.$refs.organizemeetupForm.reset();
     },
     closeForm() {
       this.resetForm();
       this.$router.push({ name: "meetups" });
     },
     organizeMeetup() {
-      if (this.$refs.form.validate()) {
+      if (this.$refs.organizemeetupForm.validate()) {
         const meetupData = {
           title: this.title,
           location: this.location,

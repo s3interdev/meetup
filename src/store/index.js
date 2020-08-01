@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { auth } from '@/firebase/firebase';
 
 Vue.use(Vuex);
 
@@ -35,14 +36,14 @@ export default new Vuex.Store({
           'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo debitis maiores hic dignissimos voluptatem. totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit.Explicabo debitis maiores hic dignissimos voluptatem.totam harum eaque veritatis voluptate iste, asperiores iusto neque eius inventore, exercitationem, deleniti labore blanditiis nam.',
       },
     ],
-    user: {
-      id: 'MzrgJMekU5Wzes3F',
-      registeredMeetups: ['WHfXpbuT2dNafmZ3'],
-    },
+    user: null,
   },
   mutations: {
     organizeMeetup(state, payload) {
       state.loadedMeetups.push(payload);
+    },
+    setUser(state, payload) {
+      state.user = payload;
     },
   },
   actions: {
@@ -58,6 +59,34 @@ export default new Vuex.Store({
 
       // Reachout to the database and persist the data
       commit('organizeMeetup', meetup);
+    },
+    signUserUp({ commit }, payload) {
+      auth()
+        .createUserWithEmailAndPassword(payload.email, payload.password)
+        .then((user) => {
+          const signedUpUser = {
+            id: user.uid,
+            registeredMeetups: [],
+          };
+          commit('setUser', signedUpUser);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    signUserIn({ commit }, payload) {
+      auth()
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then((user) => {
+          const signedInUser = {
+            id: user.uid,
+            registeredMeetups: [],
+          };
+          commit('setUser', signedInUser);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   getters: {
@@ -75,6 +104,9 @@ export default new Vuex.Store({
     },
     featuredMeetups(state, getters) {
       return getters.loadedMeetups.slice(0, 5);
+    },
+    user(state) {
+      return state.user;
     },
   },
 });

@@ -40,18 +40,37 @@
 
 <script>
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   data() {
     return {
       drawer: false,
-      items: [
-        { icon: 'supervisor_account', title: 'View Meetups', link: '/meetups' },
-        { icon: 'room', title: 'Organize Meetup', link: '/organize-meetup' },
-        { icon: 'person', title: 'Profile', link: '/profile' },
-        { icon: 'face', title: 'Sign Up', link: '/signup' },
-        { icon: 'lock_open', title: 'Sign In', link: '/signin' },
-      ],
     };
+  },
+  computed: {
+    items() {
+      let items = [
+        { icon: "face", title: "Sign Up", link: "/signup" },
+        { icon: "lock_open", title: "Sign In", link: "/signin" },
+      ];
+      if (this.userIsAuthenticated) {
+        items = [
+          {
+            icon: "supervisor_account",
+            title: "View Meetups",
+            link: "/meetups",
+          },
+          { icon: "room", title: "Organize Meetup", link: "/organize-meetup" },
+          { icon: "person", title: "Profile", link: "/profile" },
+        ];
+      }
+      return items;
+    },
+    userIsAuthenticated() {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      );
+    },
   },
 };
 </script>
