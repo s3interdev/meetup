@@ -10,8 +10,17 @@
       </v-col>
     </v-row>
 
-    <!-- Carousel -->
+    <!-- Circular progress bar -->
     <v-row>
+      <v-col>
+        <v-row justify="center">
+          <v-progress-circular indeterminate :size="89" :width="8" color="warning" v-if="loading"></v-progress-circular>
+        </v-row>
+      </v-col>
+    </v-row>
+
+    <!-- Carousel -->
+    <v-row v-if="!loading">
       <v-col>
         <v-carousel style="cursor: pointer">
           <v-carousel-item
@@ -51,6 +60,9 @@ export default {
     },
   },
   computed: {
+    loading() {
+      return this.$store.getters.loading;
+    },
     meetups() {
       return this.$store.getters.featuredMeetups;
     },
@@ -70,5 +82,11 @@ export default {
   color: white;
   font-size: 21px;
   padding: 21px;
+}
+</style>
+
+<style scoped>
+.v-progress-circular {
+  margin: 1rem;
 }
 </style>

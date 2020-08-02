@@ -11,13 +11,16 @@
 </template>
 
 <script>
-import Navbar from '@/components/utility/Navbar.vue';
+import Navbar from "@/components/utility/Navbar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: { Navbar },
   data() {
     return {};
+  },
+  created() {
+    this.$store.dispatch("loadMeetups");
   },
 };
 </script>
