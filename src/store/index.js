@@ -37,6 +37,8 @@ export default new Vuex.Store({
       },
     ],
     user: null,
+    loading: false,
+    error: null,
   },
   mutations: {
     organizeMeetup(state, payload) {
@@ -44,6 +46,15 @@ export default new Vuex.Store({
     },
     setUser(state, payload) {
       state.user = payload;
+    },
+    setLoading(state, payload) {
+      state.loading = payload;
+    },
+    setError(state, payload) {
+      state.error = payload;
+    },
+    clearError(state) {
+      state.error = null;
     },
   },
   actions: {
@@ -61,9 +72,14 @@ export default new Vuex.Store({
       commit('organizeMeetup', meetup);
     },
     signUserUp({ commit }, payload) {
-      auth()
+      commit('setLoading', true);
+      commit('clearError');
+
+      auth
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then((user) => {
+          commit('setLoading', false);
+
           const signedUpUser = {
             id: user.uid,
             registeredMeetups: [],
@@ -71,13 +87,20 @@ export default new Vuex.Store({
           commit('setUser', signedUpUser);
         })
         .catch((error) => {
+          commit('setLoading', false);
+          commit('setError', error);
           console.log(error);
         });
     },
     signUserIn({ commit }, payload) {
-      auth()
+      commit('setLoading', true);
+      commit('clearError');
+
+      auth
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then((user) => {
+          commit('setLoading', false);
+
           const signedInUser = {
             id: user.uid,
             registeredMeetups: [],
@@ -85,8 +108,13 @@ export default new Vuex.Store({
           commit('setUser', signedInUser);
         })
         .catch((error) => {
+          commit('setLoading', false);
+          commit('setError', error);
           console.log(error);
         });
+    },
+    clearError({ commit }) {
+      commit('clearError');
     },
   },
   getters: {
@@ -107,6 +135,12 @@ export default new Vuex.Store({
     },
     user(state) {
       return state.user;
+    },
+    loading(state) {
+      return state.loading;
+    },
+    error(state) {
+      return state.error;
     },
   },
 });

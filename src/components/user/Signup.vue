@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-row v-if="error">
+      <v-col cols="12" sm="6" offset-sm="3">
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card>
@@ -54,7 +59,14 @@
               <!-- Buttons -->
               <v-row>
                 <v-col>
-                  <v-btn class="info ma-3" @click="onSignUp">Sign Up</v-btn>
+                  <v-btn class="info ma-3" @click="onSignUp" :disabled="loading" :loading="loading">
+                    Sign Up
+                    <template v-slot:loader>
+                      <span class="custom-loader">
+                        <v-icon light>cached</v-icon>
+                      </span>
+                    </template>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -71,6 +83,7 @@ export default {
   data() {
     return {
       valid: true,
+      loader: null,
       email: null,
       password: null,
       confirmPassword: null,
@@ -93,6 +106,17 @@ export default {
         });
       }
     },
+    onDismissed() {
+      this.reset();
+      this.resetValidation();
+      this.$store.dispatch("clearError");
+    },
+    reset() {
+      this.$refs.signupForm.reset();
+    },
+    resetValidation() {
+      this.$refs.signupForm.resetValidation();
+    },
   },
   computed: {
     comparePasswords() {
@@ -101,6 +125,12 @@ export default {
     },
     user() {
       return this.$store.getters.user;
+    },
+    loading() {
+      return this.$store.getters.loading;
+    },
+    error() {
+      return this.$store.getters.error;
     },
   },
   watch: {
@@ -112,3 +142,42 @@ export default {
   },
 };
 </script>
+
+<style>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
