@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'Meetups',
+  name: "Meetups",
   data() {
     return {};
   },

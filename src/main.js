@@ -16,11 +16,15 @@ Vue.filter('date', DateFilter);
 Vue.component('app-alert', AlertComponent);
 
 // Let Firebase auth initialize before creating the app
-auth.onAuthStateChanged(() => {
+auth.onAuthStateChanged((user) => {
   new Vue({
     router,
     store,
     vuetify,
     render: (h) => h(App),
   }).$mount('#app');
+
+  if (user) {
+    store.dispatch('autoSignIn', user);
+  }
 });

@@ -11,6 +11,12 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-if="userIsAuthenticated" @click="onSignOut">
+          <v-list-item-icon>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Sign Out</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -20,8 +26,13 @@
 
       <!-- Application logo -->
       <v-toolbar-title class="text-uppercase">
-        <router-link to="/" tag="span" class="font-weight-light" style="cursor: pointer">Meetup</router-link>
-        <router-link to="/" tag="span" style="cursor: pointer">/Tukutane</router-link>
+        <router-link
+          :to="{ name: 'home' }"
+          tag="span"
+          class="font-weight-light"
+          style="cursor: pointer"
+        >Meetup</router-link>
+        <router-link :to="{ name: 'home' }" tag="span" style="cursor: pointer">/Tukutane</router-link>
       </v-toolbar-title>
 
       <!-- Push buttons to the right of toolbar -->
@@ -32,6 +43,9 @@
         <v-btn v-for="item in items" :key="item.text" :to="item.link" text>
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
+        </v-btn>
+        <v-btn v-if="userIsAuthenticated" @click="onSignOut">
+          <v-icon left>exit_to_app</v-icon>Sign Out
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
@@ -45,6 +59,12 @@ export default {
     return {
       drawer: false,
     };
+  },
+  methods: {
+    onSignOut() {
+      this.$store.dispatch("signOut");
+      this.$router.push({ name: "home" });
+    },
   },
   computed: {
     items() {

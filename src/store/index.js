@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { auth } from '@/firebase/firebase';
-import { db } from '../firebase/firebase';
+import { auth, db } from '@/firebase/firebase';
 
 Vue.use(Vuex);
 
@@ -55,13 +54,14 @@ export default new Vuex.Store({
           commit('setLoading', true);
         });
     },
-    organizeMeetup({ commit }, payload) {
+    organizeMeetup({ commit, getters }, payload) {
       const meetup = {
         title: payload.title,
         location: payload.location,
         imageUrl: payload.imageUrl,
         description: payload.description,
         date: payload.date,
+        creatorId: getters.user.id,
       };
 
       // Reachout to the database and persist the data
@@ -119,6 +119,13 @@ export default new Vuex.Store({
           commit('setError', error);
           console.log(error);
         });
+    },
+    autoSignIn({ commit }, payload) {
+      commit('setUser', { id: payload.uid, registeredMeetups: [] });
+    },
+    signOut({ commit }) {
+      auth.signOut();
+      commit('setUser', null);
     },
     clearError({ commit }) {
       commit('clearError');

@@ -22,8 +22,8 @@
 
 <script>
 export default {
-  name: 'Meetup',
-  props: ['id'],
+  name: "Meetup",
+  props: ["id"],
   data() {
     return {};
   },

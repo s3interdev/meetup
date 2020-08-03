@@ -4,8 +4,8 @@
     <v-row>
       <v-col>
         <v-row justify="center">
-          <v-btn class="info ma-1" to="/meetups" depressed large>Explore Meetups</v-btn>
-          <v-btn class="info ma-1" to="/organize-meetup" depressed large>Organize Meetups</v-btn>
+          <v-btn class="info ma-1" :to="{ name: 'meetups' }" depressed large>Explore Meetups</v-btn>
+          <v-btn class="info ma-1" :to="{ name: 'organizemeetup' }" depressed large>Organize Meetups</v-btn>
         </v-row>
       </v-col>
     </v-row>
